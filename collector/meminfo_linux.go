@@ -53,6 +53,10 @@ func parseMemInfo(r io.Reader) (map[string]float64, error) {
 		if len(parts) == 0 {
 			continue
 		}
+		// 忽略安卓865板卡空行
+		if len(parts) == 1 {
+			continue
+		}
 		fv, err := strconv.ParseFloat(parts[1], 64)
 		if err != nil {
 			return nil, fmt.Errorf("invalid value in meminfo: %w", err)
